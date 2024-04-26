@@ -41,10 +41,13 @@ namespace Lorax.Core.Messaging.Tests
 
         public SQSTests()
         {
+            //Config is instantiated here but not used  further. The ServiceConfig is instantiated multiple times in the code instead of using the config instance.
             Config = new ServiceConfigEnv("lx01dev"); //Or Inst?
 
+            //Instantiated but not used.
             Secrets = new Mock<ISecrets>();
 
+            //Logger is instantiated and setup but not used further.
             Logger = new Mock<ICloudWatchLogger>();
             Logger
                 .Setup(S => S.LogError(It.IsAny<Exception>())) // For any input parameter to be mocked, us It.IsAny<T>
@@ -54,6 +57,7 @@ namespace Lorax.Core.Messaging.Tests
                 })
                 .Verifiable(); //For void methods, use Verifiable
 
+            //DateTimeProvider is instantiated and setup but not used further.
             DateTimeProvider = new Mock<IDateTimeProvider>();
             DateTimeProvider.Setup(DT => DT.UtcNow).Returns(DefaultDateTime);
 
